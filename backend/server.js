@@ -86,7 +86,7 @@ app.get('/success', async (req, res) => {
         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
                 console.log(error)
-                return res.redirect("http://localhost:5173/failed");
+                return res.redirect("http://localhost:3000/failed");
             } else {
                 console.log("Execute Payment Response");
                 // console.log(payment);
@@ -97,7 +97,7 @@ app.get('/success', async (req, res) => {
 
                 console.log("transactions", transactions);
 
-                return res.redirect("http://localhost:5173/success");
+                return res.redirect("http://localhost:3000/success");
             }
         })
 
@@ -111,9 +111,12 @@ app.get('/success', async (req, res) => {
 
 app.get('/failed', async (req, res) => {
 
-    return res.redirect("http://localhost:5173/failed");
+    return res.redirect("http://localhost:3000/failed");
 })
-
+app.use(express.static(path.join(__dirname,'build')));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname,'build', 'index.html'));
+});
 // Start the server
 app.listen(8000, () => {
 
