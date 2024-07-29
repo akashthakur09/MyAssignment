@@ -27,7 +27,7 @@ const PaymentPage = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.get('/payment');
+      const res = await axios.post('/payment');
       console.log(res);
 
       if (res && res.data) {
